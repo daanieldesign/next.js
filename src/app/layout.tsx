@@ -1,5 +1,5 @@
 import localFont from 'next/font/local'
-
+import "./globals.css"
 // Font files can be colocated inside of `pages`
 
 const myFont = localFont({ src: '../../public/fonts/GeneralSans-Bold.ttf' })
