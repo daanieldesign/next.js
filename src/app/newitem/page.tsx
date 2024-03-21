@@ -4,24 +4,15 @@ import {redirect} from "next/navigation";
 
 export default function NewItem() {
 
-    async function addItem()   {
-        await prisma.todo.create(
-            {
-                data:{
-                    title:"blblabla",
-                    author:{
-                    }
-                },
-            }
-        );
-    }
 
     async function createTodoItem(data: FormData){
         "use server";
         const title = data.get("title")?.valueOf();
 
         if (typeof title === "string" ) {
-
+                await prisma.todo.create.({
+                    data
+                })
             redirect('/');
         }else return new Error("Invalid Title");
 
@@ -47,7 +38,6 @@ export default function NewItem() {
                         Cancel
                     </Link>
                     <button
-                        onClick={addItem}
                         type="submit"
                         className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-zinc-700 focus-within:bg-zinc-700 outline-none"
                     >
