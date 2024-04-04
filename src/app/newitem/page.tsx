@@ -8,11 +8,11 @@ export default function NewItem() {
     async function createTodoItem(data: FormData){
         "use server";
         const title = data.get("title")?.valueOf();
-
         if (typeof title === "string" ) {
-                await prisma.todo.create.({
-                    data
-                })
+            await prisma.todo.create({
+                data: {title},
+            });
+
             redirect('/');
         }else return new Error("Invalid Title");
 

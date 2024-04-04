@@ -32,7 +32,7 @@ export default async function NewItem() {
 
             <ul className="pl-4">
                {
-               todos.forEach((todo : TodoType)=> <div>{todo.title}</div> )
+               todos.map((todo) => <div>{todo.title}</div>)
                }
             </ul>
         </>
