@@ -1,13 +1,21 @@
 import Link from "next/link";
-import Todo from "../components/form";
 import {prisma} from "./db";
+import React from "react";
 
-export type TodoType = {
-    id: string;
+interface TodoType {
+    id: number;
     title: string;
-    complete: boolean;
-    deleted: boolean;
+    content: string | null;
+    published: boolean;
+    complete: boolean; // Added complete property
+    deleted: boolean; // Added deleted property
+}
+
+// Adjusted function definition to match the expected parameter type
+const todo = (todo: TodoType, index: number, array: TodoType[]) => {
+    // Function logic here
 };
+
 
 export default async function NewItem() {
 
@@ -19,6 +27,7 @@ export default async function NewItem() {
 
     return (
         <>
+
             <header className="flex justify-between items-center pb-5">
                 <h1 className="text-2xl underline underline-offset-4 ">Todos</h1>
                 <Link
@@ -28,12 +37,15 @@ export default async function NewItem() {
                     New
                 </Link>
             </header>
-
-
-            <ul className="pl-4">
-               {
-               todos.map((todo) => <div>{todo.title}</div>)
-               }
+            <ul className="pl-4" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+                {
+                    todos.map((todo : TodoType) => (
+                        <li key={todo.id} style={{paddingLeft: '10px'}}>
+                            <input type="checkbox"/>
+                            {todo.title}
+                        </li>
+                    ))
+                }
             </ul>
         </>
     );
