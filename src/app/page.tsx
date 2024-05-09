@@ -39,14 +39,12 @@ export default async function NewItem() {
             </header>
             <ul className="pl-4" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
                 {
-                    todos.map((todo : TodoType) => (
-                        <li key={todo.id} style={{paddingLeft: '10px'}}>
-                            <input type="checkbox"/>
-                            {todo.title}
-                        </li>
-                    ))
-                }
+                    todos.map((todo : TodoType) =>
+
+
+                    )
+
             </ul>
         </>
     );
-}
+                }
