@@ -1,33 +1,30 @@
 import Link from "next/link";
 import {prisma} from "./db";
-import React from "react";
+import ItemTile from "@/app/components/item_tile";
 
-interface TodoType {
-    id: number;
+export type TodoType = {
+    id: string;
     title: string;
-    content: string | null;
-    published: boolean;
-    complete: boolean; // Added complete property
-    deleted: boolean; // Added deleted property
-}
-
-// Adjusted function definition to match the expected parameter type
-const todo = (todo: TodoType, index: number, array: TodoType[]) => {
-    // Function logic here
+    complete: boolean;
+    deleted: boolean;
 };
 
-
-export default async function NewItem() {
-
+export default async function Home() {
+    "use server";
     function getTodos() {
         return prisma.todo.findMany({
         });
+    }
+    function deleteTodo(id : number) {
+        return prisma.todo.delete({
+            where: {
+                id: id,
+            }});
     }
     const todos = await getTodos();
 
     return (
         <>
-
             <header className="flex justify-between items-center pb-5">
                 <h1 className="text-2xl underline underline-offset-4 ">Todos</h1>
                 <Link
@@ -37,14 +34,14 @@ export default async function NewItem() {
                     New
                 </Link>
             </header>
-            <ul className="pl-4" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+            <ul className="pl-4">
                 {
-                    todos.map((todo : TodoType) =>
-
-
+                    todos.map(
+                        (todo: TodoType) =>
+                            <ItemTile id ={""} content={"Nefunguje to"}/>
                     )
-
+                }
             </ul>
         </>
     );
-                }
+}
